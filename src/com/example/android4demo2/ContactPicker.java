@@ -1,7 +1,5 @@
 package com.example.android4demo2;
 
-import java.net.URI;
-
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Intent;
