@@ -10,11 +10,10 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-public class ContactPicker extends Activity {
+public class ContactPickerActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,14 +25,14 @@ public class ContactPicker extends Activity {
 		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.listitemlayout, c, from, to);
 		ListView lv = (ListView) findViewById(R.id.contactListView);
 		lv.setAdapter(adapter);
-		lv.setOnItemClickListener(new OnItemClickListener() {
+		lv.setOnItemClickListener(new ListView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				// 将curcor移至选中项
 				c.moveToPosition(position);
 				// 获得行ID
-				int rowId = c.getInt(c.getColumnIndex("_id"));
+				int rowId = c.getInt(c.getColumnIndexOrThrow("_id"));
 
 				// 构建result URI
 
@@ -45,6 +44,5 @@ public class ContactPicker extends Activity {
 				finish();
 			}
 		});
-		c.close();
 	}
 }
